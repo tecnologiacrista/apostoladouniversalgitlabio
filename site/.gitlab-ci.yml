@@ -1,0 +1,13 @@
+# GitLab Pages - publica o conteudo da raiz do repositorio
+image: alpine:latest
+
+pages:
+  stage: deploy
+  script:
+    - mkdir -p public
+    - find . -maxdepth 1 -mindepth 1 ! -name public ! -name .git -exec cp -r {} public/ \;
+  artifacts:
+    paths:
+      - public
+  only:
+    - main
